@@ -15,6 +15,7 @@
         <v-card class="elevation-12">
           <v-card-text>
             <div class="text-center display-1">Login</div>
+            <div class="text-center subtitle">Continuar para JudBras</div>
 
             <v-form>
               <v-text-field
@@ -38,10 +39,9 @@
             <v-btn text small color="primary">Criar Conta</v-btn>
             <v-spacer />
             <v-btn
-              class="ma-2"
               color="primary"
               large
-              @click="bla"
+              @click="login"
             >
               Entrar
             </v-btn>
@@ -53,12 +53,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
   methods: {
-    bla () {
-      console.log(this.$router)
-    }
+    login () {
+      this.toggleAppBar(true)
+      this.$router.push('home')
+    },
+    ...mapActions([
+      'toggleAppBar'
+    ])
   }
 }
 </script>
