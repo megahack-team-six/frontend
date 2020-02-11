@@ -3,7 +3,7 @@
     <v-app-bar
       app
       color="primary"
-      :value="false"
+      :value="appBar"
       dark
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -39,10 +39,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'App',
-  data: () => ({
-    //
-  })
+  computed: {
+    ...mapGetters([
+      'appBar'
+    ])
+  }
 }
 </script>
