@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<meta charset=UTF-8>
+<meta name=viewport content='width=device-width, initial-scale=1.0'>
+<title>JudiBras</title>
+<style>
+a{color:#3333aa; cursor:pointer;}
+table{background-color:#f3f3d9; border-radius:8px; border:1px solid #333366; margin:0px auto;}
+td,th{color:#333366; padding:6px 6px 2px 6px; text-align:left;}
+th{border-bottom:1px solid #666699; padding-bottom:6px; text-align:center;}
+.aviso{margin:20px 10px; background-color:#cc3333; border-radius:6px; color:#ffffff; padding:12px; text-align:center; font-weight:bold;}
+</style>
+<body style='font-family:Verdana;'>
+<div style='background-color:#875650; color:#dddddd; font-size:40px; padding:20px; cursor:pointer;' onclick="location.href='index.php';">JudiBras</div>
+<div style='min-height:72vh; margin:6px 0px; display:flex; justify-content:center; align-items:center;'><div style='text-align:center;'>
+<form action=index.php?mdl=cadastro method=post>
+<table>
+<tr><th colspan=2>Cadastro de Usuário</th></tr>
+<tr><td colspan=2><input type=radio name=tipo value=juiz disabled>Juiz <input type=radio name=tipo value=advogado checked>Advogado <input type=radio name=tipo value=imprensa>Imprensa <input type=radio name=tipo value=outro>Outro</td></tr>
+<tr><td>Nome</td><td><input required name=nome></td></tr>
+<tr><td>Email</td><td><input required name=email></td></tr>
+<tr><td>Telefone</td><td><input></td></tr>
+<tr><td>Senha</td><td><input required name=senha type=password></td></tr>
+<tr><td>Confirma</td><td><input type=password></td></tr>
+<tr><td colspan=2 style='text-align:right;'><a style='font-size:12px;' onclick="location.href='index.php';">..já sou cadastrado</a> <input type=submit value=Cadastrar></td></tr>
+</table>
+</form>
+</div></div>
+<div style='background-color:#875650; color:#dddddd; font-size:18px; padding:12px; text-align:right;'>Software de Apoio ao Sistema Judiciário Brasileiro<br>@Equipe13</div>
+</body>
+</html>
