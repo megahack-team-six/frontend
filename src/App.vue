@@ -3,7 +3,6 @@
     <v-app-bar
       app
       color="primary"
-      :value="appBar"
       dark
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -24,9 +23,9 @@
 
         <v-list>
           <v-list-item
-            @click="() => {}"
+            @click="loginOrLogout"
           >
-            <v-list-item-title>Login</v-list-item-title>
+            <v-list-item-title>{{ logUserText }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -39,14 +38,37 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   computed: {
-    ...mapGetters([
-      'appBar'
+    isLogged () {
+      return !!this.jwt
+    },
+    logUserText () {
+      return this.isLogged ? 'Sair' : 'Entrar'
+    },
+    ...mapGetters('user', [
+      'jwt'
     ])
+  },
+  methods: {
+    loginOrLogout () {
+      if (this.isLogged) {
+        this.logout()
+        this.$router.push('/')
+      } else {
+        this.$router.push('/login')
+      }
+    },
+    ...mapActions('user', {
+      loadUser: 'init',
+      logout: 'logout'
+    })
+  },
+  mounted () {
+    this.loadUser()
   }
 }
 </script>
