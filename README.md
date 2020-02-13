@@ -1,4 +1,10 @@
-# JusBras
+# JudBras
+
+## Confira no arquivo de variáveis de ambiente se o base_url da api está certo em `.env.development`
+```
+# Coloque aqui o caminho para a api
+VUE_APP_API='http://localhost:8000/api'
+```
 
 ## Instalação de dependências
 ```
