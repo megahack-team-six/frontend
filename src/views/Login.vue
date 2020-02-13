@@ -12,21 +12,33 @@
         sm="8"
         md="3"
       >
+        <v-alert
+          :value="error.visible"
+          type="error"
+          class="elevation-12"
+        >
+          {{ error.message }}
+        </v-alert>
         <v-card class="elevation-12">
           <v-card-text>
             <div class="text-center display-1">Login</div>
             <div class="text-center subtitle">Continuar para JudBras</div>
 
-            <v-form>
+            <v-form
+              :valid="form.valid"
+            >
               <v-text-field
-                label="Usuário"
-                name="login"
+                v-model="form.email"
+                :rules="form.emailRules"
+                label="Email"
+                name="email"
                 prepend-icon="mdi-account"
                 type="text"
               />
 
               <v-text-field
-                id="password"
+                v-model="form.password"
+                :rules="form.passwordRules"
                 label="Senha"
                 name="password"
                 prepend-icon="mdi-key"
@@ -41,7 +53,7 @@
             <v-btn
               color="primary"
               large
-              @click="login"
+              @click="submit"
             >
               Entrar
             </v-btn>
@@ -57,13 +69,40 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
+  data () {
+    return {
+      error: {
+        message: '',
+        visible: false
+      },
+      form: {
+        valid: true,
+        email: '',
+        emailRules: [
+          v => !!v || 'E-mail é obrigatório'
+        ],
+        password: '',
+        passwordRules: [
+          v => !!v || 'Senha é obrigatória'
+        ]
+      }
+    }
+  },
   methods: {
-    login () {
-      this.toggleAppBar(true)
-      this.$router.push('home')
+    submit () {
+      const { email, password } = this.form
+
+      this.login({ email, password }).then((message) => {
+        if (message === 'Login efetuado com sucesso') {
+          this.$router.push('events')
+        } else {
+          this.error.visible = true
+          this.error.message = message
+        }
+      })
     },
-    ...mapActions([
-      'toggleAppBar'
+    ...mapActions('user', [
+      'login'
     ])
   }
 }
